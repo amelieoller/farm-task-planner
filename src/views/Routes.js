@@ -8,7 +8,7 @@ import FieldList from "./fields/FieldList";
 import FieldNew from "./fields/FieldNew";
 import Account from "./account/Account";
 import FieldEdit from "./fields/FieldEdit";
-import Field from "./fields/Field";
+import FieldPage from "./fields/FieldPage";
 import Error from "./misc/Error";
 
 const Routes = () => (
@@ -17,7 +17,7 @@ const Routes = () => (
     <Route path="/new" component={FieldNew} />
     <Route path="/account" component={Account} />
     <Route path="/:slug/edit" component={FieldEdit} />
-    <Route path="/:slug" component={Field} />
+    <Route path="/:slug" component={FieldPage} />
     <Route component={Error} />
   </Switch>
 );

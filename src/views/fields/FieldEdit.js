@@ -32,8 +32,8 @@ const FieldEdit = ({ match, history }) => (
           <div>
             <FieldForm
               field={field}
-              onSubmit={(values) =>
-                updateField(field.id, values).then(() =>
+              onSubmit={(newField) =>
+                updateField(field.id, newField).then(() =>
                   history.push(`/${field.slug}`)
                 )
               }

@@ -7,8 +7,15 @@
 
 import React, { useState } from "react";
 
-import { FormRow, FormLabel, TextInput, Checkbox } from "../../styles/forms";
-import Task from "./Task";
+import {
+  FormRow,
+  FormLabel,
+  TextInput,
+  Checkbox,
+  Button,
+} from "../../styles/forms";
+import TaskNew from "./TaskNew";
+import { ReactComponent as PlusCircleIcon } from "../../assets/icons/plus-circle.svg";
 
 const FieldForm = ({ onSubmit, field }) => {
   const [title, setTitle] = useState((field && field.title) || "");
@@ -20,6 +27,7 @@ const FieldForm = ({ onSubmit, field }) => {
     onSubmit({
       title: title,
       tasks: tasks,
+      lastWorkDone: new Date(),
     });
   };
 
@@ -30,34 +38,35 @@ const FieldForm = ({ onSubmit, field }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <FormRow>
-        <FormLabel htmlFor="title">Title</FormLabel>
-        <TextInput
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
+    <>
+      <h1>Create A New Field</h1>
+      <form onSubmit={handleSubmit}>
+        <FormRow>
+          <FormLabel htmlFor="title">Field Title</FormLabel>
+          <TextInput
+            type="text"
+            name="Field Title"
+            placeholder="Field Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </FormRow>
+
+        <h2>Tasks</h2>
+        {tasks.map((task, i) => (
+          <TaskNew key={i} task={task} onSubmit={onTaskSave} />
+        ))}
+
+        <PlusCircleIcon
+          onClick={() =>
+            setTasks((prevTasks) => [...prevTasks, { id: tasks.length }])
+          }
         />
-      </FormRow>
 
-      <h2>Tasks</h2>
-      {tasks.map((task, i) => (
-        <Task key={i} task={task} onSubmit={onTaskSave} />
-      ))}
-
-      <button
-        type="submit"
-        onClick={() =>
-          setTasks((prevTasks) => [...prevTasks, { id: tasks.length }])
-        }
-      >
-        Add task
-      </button>
-
-      <button type="submit">Save field</button>
-    </form>
+        <hr />
+        <Button type="submit">Save field</Button>
+      </form>
+    </>
   );
 };
 

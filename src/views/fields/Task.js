@@ -1,52 +1,83 @@
-// This is an uncontrolled React form, which is way simpler than
-// the normal React controlled form
-// https://reactjs.org/docs/uncontrolled-components.html
-//
-// You can use browser form validation these days, and just
-// get the values from the form on submit.
+import React, { useRef } from "react";
+import { useDrag, useDrop } from "react-dnd";
+import styled from "styled-components";
 
-import React, { useState } from "react";
+const style = {
+  border: "1px dashed gray",
+  padding: "0.5rem 1rem",
+  marginBottom: ".5rem",
+  backgroundColor: "white",
+  cursor: "move",
+};
 
-import { FormRow, FormLabel, TextInput, Checkbox } from "../../styles/forms";
+const ItemTypes = {
+  CARD: "card",
+};
 
-const Task = ({ onSubmit, task }) => {
-  const [title, setTitle] = useState((task && task.title) || "");
-  const [isDependent, setIsDependent] = useState(
-    (task && task.isDependent) || false
-  );
+const Task = ({ task, index, moveCard }) => {
+  const ref = useRef(null);
+  const [, drop] = useDrop({
+    accept: ItemTypes.CARD,
+    hover(item, monitor) {
+      if (!ref.current) {
+        return;
+      }
+      const dragIndex = item.index;
+      const hoverIndex = index;
+      // Don't replace items with themselves
+      if (dragIndex === hoverIndex) {
+        return;
+      }
+      // Determine rectangle on screen
+      const hoverBoundingRect = ref.current?.getBoundingClientRect();
+      // Get vertical middle
+      const hoverMiddleY =
+        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
+      // Determine mouse position
+      const clientOffset = monitor.getClientOffset();
+      // Get pixels to the top
+      const hoverClientY = clientOffset.y - hoverBoundingRect.top;
+      // Only perform the move when the mouse has crossed half of the items height
+      // When dragging downwards, only move when the cursor is below 50%
+      // When dragging upwards, only move when the cursor is above 50%
+      // Dragging downwards
+      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
+        return;
+      }
+      // Dragging upwards
+      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
+        return;
+      }
+      // Time to actually perform the action
+      moveCard(dragIndex, hoverIndex);
+      // Note: we're mutating the monitor item here!
+      // Generally it's better to avoid mutations,
+      // but it's good here for the sake of performance
+      // to avoid expensive index searches.
+      item.index = hoverIndex;
+    },
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    onSubmit({ ...task, title: title, isDependent: isDependent });
-  };
+  const [{ isDragging }, drag] = useDrag({
+    item: { type: ItemTypes.CARD, id: task.id, index },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  });
+  const opacity = isDragging ? 0 : 1;
+  drag(drop(ref));
 
   return (
-    <div>
-      <FormRow>
-        <FormLabel htmlFor="title">Title</FormLabel>
-        <TextInput
-          type="text"
-          name="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-      </FormRow>
-
-      <FormRow>
-        <Checkbox
-          type="checkbox"
-          name="isDependent"
-          checked={isDependent}
-          onChange={(e) => setIsDependent(e.target.checked)}
-        />
-        <FormLabel htmlFor="isDependent">Is Dependent</FormLabel>
-      </FormRow>
-
-      <button onClick={handleSubmit}>Save task</button>
-    </div>
+    <StyledTask ref={ref} style={{ ...style, opacity }}>
+      <span>{task.title}</span>
+      <span>{task.isDependent && "isDependent"}</span>
+    </StyledTask>
   );
 };
+
+const StyledTask = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default Task;

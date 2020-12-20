@@ -7,12 +7,13 @@ import logIn from "../../actions/logIn";
 import FirebaseAuth from "../misc/FirebaseAuth";
 import { HeaderFooterWrapper, Header, Footer } from "../../styles/layout";
 import { HeaderLink } from "../../styles/links";
+import { ReactComponent as UserIcon } from "../../assets/icons/user.svg";
 
 const Layout = ({ children }) => (
   <HeaderFooterWrapper>
     <Header>
-      <HeaderLink to="/">Farmr</HeaderLink>
-
+      <HeaderLink to="/">Home</HeaderLink> ·{" "}
+      <HeaderLink to="/new">New Field</HeaderLink>
       <div style={{ float: "right" }}>
         <FirebaseAuth>
           {({ isLoading, error, auth }) => {
@@ -26,7 +27,7 @@ const Layout = ({ children }) => (
               return (
                 <HeaderLink to={`/account`}>
                   <span role="img" aria-label="account">
-                    👤
+                    <UserIcon />
                   </span>
                 </HeaderLink>
               );
@@ -39,8 +40,6 @@ const Layout = ({ children }) => (
     </Header>
 
     {children}
-
-    <Footer>© {new Date().getFullYear()}</Footer>
   </HeaderFooterWrapper>
 );
 

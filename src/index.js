@@ -21,10 +21,6 @@ const dbConfig = {
 };
 Firebase.initializeApp(dbConfig);
 
-// Google Analytics
-// https://github.com/react-ga/react-ga#api
-ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_TRACKING_ID);
-
 // Sentry
 // https://docs.sentry.io/clients/javascript/integrations/react/
 window.Raven.config(process.env.REACT_APP_SENTRY_RAVEN_TRACKING_URL).install();

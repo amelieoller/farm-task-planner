@@ -9,7 +9,7 @@ const FieldList = () => (
   <Page>
     <InternalLink to="/new">New field</InternalLink>
     <hr />
-    <FirestoreCollection path={"fields"} sort="_likeCount:desc">
+    <FirestoreCollection path={"fields"} sort="title:asc">
       {({ error, isLoading, data }) => {
         if (error) {
           return <Error error={error} />;

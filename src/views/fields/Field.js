@@ -1,49 +1,37 @@
-import React from "react";
-import { FirestoreCollection } from "react-firestore";
+import React, { useState, useCallback } from "react";
+import update from "immutability-helper";
 
-import Error from "../misc/Error";
-import FirebaseAuth from "../misc/FirebaseAuth";
-import LikeButton from "./LikeButton";
-import { InternalLink } from "../../styles/links";
-import { Page } from "../../styles/layout";
+import Task from "./Task";
+import updateField from "../../actions/updateField";
 
-const Field = ({ match }) => (
-  <Page>
-    <FirestoreCollection
-      path={"fields"}
-      filter={["slug", "==", match.params.slug]}
-    >
-      {({ error, isLoading, data }) => {
-        if (error) {
-          return <Error error={error} />;
-        }
+const Field = ({ field }) => {
+  const [tasks, setTasks] = useState(field.tasks);
 
-        if (isLoading) {
-          return <p>loading...</p>;
-        }
+  const moveCard = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragCard = tasks[dragIndex];
+      const newTasks = update(tasks, {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard],
+        ],
+      });
 
-        if (data.length === 0) {
-          return <Error />;
-        }
+      updateField(field.id, { ...field, tasks: newTasks });
+      setTasks(newTasks);
+    },
+    [tasks]
+  );
 
-        const field = data[0];
-
-        return (
-          <div>
-            <h1>{field.title}</h1>
-            other stuff
-            <FirebaseAuth>
-              {({ auth }) =>
-                auth ? (
-                  <InternalLink to={`/${field.slug}/edit`}>Edit</InternalLink>
-                ) : null
-              }
-            </FirebaseAuth>
-          </div>
-        );
-      }}
-    </FirestoreCollection>
-  </Page>
-);
+  return (
+    <>
+      <div>
+        {tasks.map((task, i) => (
+          <Task key={task.id} index={i} task={task} moveCard={moveCard} />
+        ))}
+      </div>
+    </>
+  );
+};
 
 export default Field;
