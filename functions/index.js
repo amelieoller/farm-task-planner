@@ -5,7 +5,6 @@ admin.initializeApp(functions.config().firebase)
 
 const fieldLikes = require('./lib/fieldLikes')
 
-exports.updateFieldLikeCount = functions
-  .firestore
+exports.updateFieldLikeCount = functions.firestore
   .document('fieldLikes/{fieldLikeId}')
   .onWrite(fieldLikes.updateFieldLikeCount)

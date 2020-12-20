@@ -1,29 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import updateField from "../../actions/updateField";
-import Backstage from "./Backstage";
-import Live from "./Live";
+import React, { useState, useEffect } from 'react'
+import { Route, Switch } from 'react-router-dom'
+import updateField from '../../actions/updateField'
+import Backstage from './Backstage'
+import Live from './Live'
 
 const Steam = ({ fields }) => {
-  const [tasksToDisplay, setTasksToDisplay] = useState([]);
+  const [tasksToDisplay, setTasksToDisplay] = useState([])
 
   useEffect(() => {
-    const displayTasks = [];
+    const displayTasks = []
 
     for (let i = 0; i < fields.length; i++) {
-      const field = fields[i];
-      const tasks = field.tasks;
+      const field = fields[i]
+      const { tasks } = field
       // const { tasks, ...field } = fields[i];
 
       for (let j = 0; j < tasks.length; j++) {
-        const task = tasks[j];
+        const task = tasks[j]
 
         // If current task is completed, skip over it (continue)
-        if (task.status !== "completed") {
-          displayTasks.push({ ...task, field });
+        if (task.status !== 'completed') {
+          displayTasks.push({ ...task, field })
 
           // If current task is not started, push it and break
-          if (task.status === "not started") break;
+          if (task.status === 'not started') break
         }
       }
     }
@@ -37,9 +37,9 @@ const Steam = ({ fields }) => {
     //     updateField(field.id, { ...field, tasks });
     //   }
     // } else {
-    setTasksToDisplay(displayTasks);
+    setTasksToDisplay(displayTasks)
     // }
-  }, [fields]);
+  }, [fields])
 
   return (
     <Switch>
@@ -52,7 +52,7 @@ const Steam = ({ fields }) => {
         render={() => <Backstage tasks={tasksToDisplay} />}
       />
     </Switch>
-  );
-};
+  )
+}
 
-export default Steam;
+export default Steam

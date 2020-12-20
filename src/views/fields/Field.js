@@ -1,27 +1,27 @@
-import React, { useState, useCallback } from "react";
-import update from "immutability-helper";
+import React, { useState, useCallback } from 'react'
+import update from 'immutability-helper'
 
-import Task from "./Task";
-import updateField from "../../actions/updateField";
+import Task from './Task'
+import updateField from '../../actions/updateField'
 
 const Field = ({ field }) => {
-  const [tasks, setTasks] = useState(field.tasks);
+  const [tasks, setTasks] = useState(field.tasks)
 
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
-      const dragCard = tasks[dragIndex];
+      const dragCard = tasks[dragIndex]
       const newTasks = update(tasks, {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard],
         ],
-      });
+      })
 
-      updateField(field.id, { ...field, tasks: newTasks });
-      setTasks(newTasks);
+      updateField(field.id, { ...field, tasks: newTasks })
+      setTasks(newTasks)
     },
-    [tasks]
-  );
+    [tasks],
+  )
 
   return (
     <>
@@ -31,7 +31,7 @@ const Field = ({ field }) => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Field;
+export default Field

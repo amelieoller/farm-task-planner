@@ -18,7 +18,4 @@ const HeaderLink = styled(Link)`
   font-size: 1.2rem;
 `
 
-export {
-  InternalLink,
-  HeaderLink,
-}
+export { InternalLink, HeaderLink }

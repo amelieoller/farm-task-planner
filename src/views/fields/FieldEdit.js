@@ -1,32 +1,32 @@
-import React from "react";
-import { FirestoreCollection } from "react-firestore";
+import React from 'react'
+import { FirestoreCollection } from 'react-firestore'
 
-import Error from "../misc/Error";
-import deleteField from "../../actions/deleteField";
-import updateField from "../../actions/updateField";
-import FieldForm from "./FieldForm";
-import { Page } from "../../styles/layout";
+import Error from '../misc/Error'
+import deleteField from '../../actions/deleteField'
+import updateField from '../../actions/updateField'
+import FieldForm from './FieldForm'
+import { Page } from '../../styles/layout'
 
 const FieldEdit = ({ match, history }) => (
   <Page>
     <FirestoreCollection
-      path={"fields"}
-      filter={["slug", "==", match.params.slug]}
+      path="fields"
+      filter={['slug', '==', match.params.slug]}
     >
       {({ error, isLoading, data }) => {
         if (error) {
-          return <Error error={error} />;
+          return <Error error={error} />
         }
 
         if (isLoading) {
-          return <p>loading...</p>;
+          return <p>loading...</p>
         }
 
         if (data.length === 0) {
-          return <Error />;
+          return <Error />
         }
 
-        const field = data[0];
+        const field = data[0]
 
         return (
           <div>
@@ -34,7 +34,7 @@ const FieldEdit = ({ match, history }) => (
               field={field}
               onSubmit={(newField) =>
                 updateField(field.id, newField).then(() =>
-                  history.push(`/${field.slug}`)
+                  history.push(`/${field.slug}`),
                 )
               }
             />
@@ -45,10 +45,10 @@ const FieldEdit = ({ match, history }) => (
               Delete field
             </button>
           </div>
-        );
+        )
       }}
     </FirestoreCollection>
   </Page>
-);
+)
 
-export default FieldEdit;
+export default FieldEdit

@@ -1,8 +1,8 @@
-import React from "react";
-import { Route } from "react-router-dom";
+import React from 'react'
+import { Route } from 'react-router-dom'
 
-import logOut from "../../actions/logOut";
-import { Button } from "../../styles/forms";
+import logOut from '../../actions/logOut'
+import { Button } from '../../styles/forms'
 
 const Profile = ({ auth }) => (
   <Route
@@ -24,6 +24,6 @@ const Profile = ({ auth }) => (
       </div>
     )}
   />
-);
+)
 
-export default Profile;
+export default Profile

@@ -5,7 +5,7 @@
 // You can use browser form validation these days, and just
 // get the values from the form on submit.
 
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 import {
   FormRow,
@@ -13,29 +13,27 @@ import {
   TextInput,
   Checkbox,
   Button,
-} from "../../styles/forms";
-import TaskNew from "./TaskNew";
-import { ReactComponent as PlusCircleIcon } from "../../assets/icons/plus-circle.svg";
+} from '../../styles/forms'
+import TaskNew from './TaskNew'
+import { ReactComponent as PlusCircleIcon } from '../../assets/icons/plus-circle.svg'
 
 const FieldForm = ({ onSubmit, field }) => {
-  const [title, setTitle] = useState((field && field.title) || "");
-  const [tasks, setTasks] = useState((field && field.tasks) || []);
+  const [title, setTitle] = useState((field && field.title) || '')
+  const [tasks, setTasks] = useState((field && field.tasks) || [])
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     onSubmit({
-      title: title,
-      tasks: tasks,
+      title,
+      tasks,
       lastWorkDone: new Date(),
-    });
-  };
+    })
+  }
 
   const onTaskSave = (task) => {
-    setTasks((prevTasks) =>
-      prevTasks.map((t) => (t.id === task.id ? task : t))
-    );
-  };
+    setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? task : t)))
+  }
 
   return (
     <>
@@ -67,7 +65,7 @@ const FieldForm = ({ onSubmit, field }) => {
         <Button type="submit">Save field</Button>
       </form>
     </>
-  );
-};
+  )
+}
 
-export default FieldForm;
+export default FieldForm

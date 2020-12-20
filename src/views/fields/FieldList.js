@@ -1,26 +1,26 @@
-import React from "react";
-import { FirestoreCollection } from "react-firestore";
+import React from 'react'
+import { FirestoreCollection } from 'react-firestore'
 
-import Error from "../misc/Error";
-import { InternalLink } from "../../styles/links";
-import { Page } from "../../styles/layout";
+import Error from '../misc/Error'
+import { InternalLink } from '../../styles/links'
+import { Page } from '../../styles/layout'
 
 const FieldList = () => (
   <Page>
     <InternalLink to="/new">New field</InternalLink>
     <hr />
-    <FirestoreCollection path={"fields"} sort="title:asc">
+    <FirestoreCollection path="fields" sort="title:asc">
       {({ error, isLoading, data }) => {
         if (error) {
-          return <Error error={error} />;
+          return <Error error={error} />
         }
 
         if (isLoading) {
-          return <p>loading...</p>;
+          return <p>loading...</p>
         }
 
         if (data.length === 0) {
-          return <p>No fields yet!</p>;
+          return <p>No fields yet!</p>
         }
 
         return (
@@ -31,10 +31,10 @@ const FieldList = () => (
               </div>
             ))}
           </div>
-        );
+        )
       }}
     </FirestoreCollection>
   </Page>
-);
+)
 
-export default FieldList;
+export default FieldList

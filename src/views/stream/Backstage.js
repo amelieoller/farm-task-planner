@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
-import BackstageTask from "./BackstageTask";
+import BackstageTask from './BackstageTask'
 
 const Backstage = ({ tasks }) => (
   <StyledTask>
@@ -15,7 +15,7 @@ const Backstage = ({ tasks }) => (
       <BackstageTask key={i} task={task} field={task.field} />
     ))}
   </StyledTask>
-);
+)
 
 const StyledTask = styled.div`
   height: 100vh;
@@ -23,6 +23,12 @@ const StyledTask = styled.div`
   font-size: 21px;
   font-weight: 600;
   line-height: 25px;
-`;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+`
 
-export default Backstage;
+export default Backstage

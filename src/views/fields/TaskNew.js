@@ -5,8 +5,8 @@
 // You can use browser form validation these days, and just
 // get the values from the form on submit.
 
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { useState } from 'react'
+import styled from 'styled-components'
 
 import {
   FormRow,
@@ -14,36 +14,36 @@ import {
   TextInput,
   Checkbox,
   Button,
-} from "../../styles/forms";
+} from '../../styles/forms'
 
 const TaskNew = ({ onSubmit, task }) => {
-  const [title, setTitle] = useState((task && task.title) || "");
+  const [title, setTitle] = useState((task && task.title) || '')
   const [isDependent, setIsDependent] = useState(
-    (task && task.isDependent) || false
-  );
-  const [hasChanged, setHasChanged] = useState(true);
+    (task && task.isDependent) || false,
+  )
+  const [hasChanged, setHasChanged] = useState(true)
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     onSubmit({
       ...task,
-      title: title,
-      isDependent: isDependent,
-      status: "not started",
-    });
+      title,
+      isDependent,
+      status: 'not started',
+    })
 
-    setHasChanged(false);
-  };
+    setHasChanged(false)
+  }
 
   const handleChange = (cb) => {
-    cb();
-    setHasChanged(true);
-  };
+    cb()
+    setHasChanged(true)
+  }
 
   return (
     <StyledTaskNew>
-      <FormRow style={{ width: "100%" }}>
+      <FormRow style={{ width: '100%' }}>
         <FormLabel htmlFor="title">Task Title</FormLabel>
         <TextInput
           type="text"
@@ -53,7 +53,7 @@ const TaskNew = ({ onSubmit, task }) => {
         />
       </FormRow>
 
-      <FormRow style={{ display: "flex", alignItems: "center" }}>
+      <FormRow style={{ display: 'flex', alignItems: 'center' }}>
         <Checkbox
           type="checkbox"
           name="isDependent"
@@ -64,13 +64,13 @@ const TaskNew = ({ onSubmit, task }) => {
       </FormRow>
 
       {hasChanged && (
-        <div style={{ margin: "0 auto" }}>
+        <div style={{ margin: '0 auto' }}>
           <Button onClick={handleSubmit}>Save task</Button>
         </div>
       )}
     </StyledTaskNew>
-  );
-};
+  )
+}
 
 const StyledTaskNew = styled.div`
   display: grid;
@@ -78,6 +78,6 @@ const StyledTaskNew = styled.div`
   width: 100%;
   align-items: center;
   grid-gap: 10px;
-`;
+`
 
-export default TaskNew;
+export default TaskNew

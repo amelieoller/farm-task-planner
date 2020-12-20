@@ -2,15 +2,15 @@
 
 import React from 'react'
 
-import {
-  InternalLink,
-} from '../../styles/links'
+import { InternalLink } from '../../styles/links'
 
-const Error = ({error}) => (
+const Error = ({ error }) => (
   <div>
     <h1>Whoops</h1>
-    <p>{`Sorry, something went wrong. We're looking into it.`}</p>
-    <div style={{fontFamily: 'monospace'}}>{error ? error.message : null}</div>
+    <p>Sorry, something went wrong. We're looking into it.</p>
+    <div style={{ fontFamily: 'monospace' }}>
+      {error ? error.message : null}
+    </div>
     <InternalLink to="/">Go to the homepage</InternalLink>
   </div>
 )

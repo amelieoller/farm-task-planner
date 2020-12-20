@@ -6,7 +6,6 @@ import Firebase from 'firebase/app'
 import React from 'react'
 
 class FirebaseAuth extends React.Component {
-
   state = {
     isLoading: true,
     error: null,
@@ -14,8 +13,10 @@ class FirebaseAuth extends React.Component {
   }
 
   componentDidMount() {
-    this.unsubscribe = Firebase.auth()
-      .onAuthStateChanged(this.handleAuth, this.handleError)
+    this.unsubscribe = Firebase.auth().onAuthStateChanged(
+      this.handleAuth,
+      this.handleError,
+    )
   }
 
   componentWillUnmount() {
@@ -24,7 +25,7 @@ class FirebaseAuth extends React.Component {
     }
   }
 
-  handleAuth = auth => {
+  handleAuth = (auth) => {
     this.setState({
       isLoading: false,
       auth,
@@ -32,7 +33,7 @@ class FirebaseAuth extends React.Component {
     })
   }
 
-  handleError = error => {
+  handleError = (error) => {
     this.setState({
       isLoading: false,
       auth: null,
@@ -43,7 +44,6 @@ class FirebaseAuth extends React.Component {
   render() {
     return this.props.children(this.state)
   }
-
 }
 
 export default FirebaseAuth

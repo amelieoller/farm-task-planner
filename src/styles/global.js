@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 const GlobalStyle = createGlobalStyle`
   *:before,
@@ -65,6 +65,6 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     font-size: .85rem;
   }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle
