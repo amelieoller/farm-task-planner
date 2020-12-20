@@ -29,12 +29,13 @@ __generated__
 .DS_Store
 .env.local
 .env.*.local
-.eslintcache
-.yarn-integrity
-backup.sql
-VERSION
 .env
 .env.dev
 .env.stage
 .env.live
+.eslintcache
+.yarn-integrity
+backup.sql
+VERSION
 serviceAccountKey*
+.eslintcache
