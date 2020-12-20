@@ -3,21 +3,14 @@ const functions = require('firebase-functions')
 
 admin.initializeApp(functions.config().firebase)
 
-const postLikes = require('./lib/postLikes')
-const search = require('./lib/search')
-const subscriptions = require('./lib/subscriptions')
+const fieldLikes = require('./lib/fieldLikes')
 
-exports.updatePostInSearchIndex = functions
+exports.updateFieldInSearchIndex = functions
   .firestore
-  .document('posts/{postId}')
-  .onWrite(search.updatePostInSearchIndex)
+  .document('fields/{fieldId}')
+  .onWrite(search.updateFieldInSearchIndex)
 
-exports.updateStripeSubscription = functions
+exports.updateFieldLikeCount = functions
   .firestore
-  .document('subscriptions/{subscriptionId}')
-  .onWrite(subscriptions.updateStripeSubscription)
-
-exports.updatePostLikeCount = functions
-  .firestore
-  .document('postLikes/{postLikeId}')
-  .onWrite(postLikes.updatePostLikeCount)
+  .document('fieldLikes/{fieldLikeId}')
+  .onWrite(fieldLikes.updateFieldLikeCount)

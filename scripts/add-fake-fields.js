@@ -1,7 +1,7 @@
 const admin = require('firebase-admin')
 const chalk = require('chalk')
 
-const postData = require("./data/fake-posts.json")
+const fieldData = require("./data/fake-fields.json")
 
 // init firebase
 const serviceAccount = require('./serviceAccountKey.dev.json')
@@ -10,7 +10,7 @@ admin.initializeApp({
 })
 const db = require('firebase-admin').firestore()
 
-// add fake posts
-console.log(chalk.blue(`Adding fake post data...`))
-postData.map( post => db.collection('posts').add(post) )
-console.log(chalk.green(`...added fake posts`))
+// add fake fields
+console.log(chalk.blue(`Adding fake field data...`))
+fieldData.map( field => db.collection('fields').add(field) )
+console.log(chalk.green(`...added fake fields`))
