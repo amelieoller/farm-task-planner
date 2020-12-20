@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import updateField from '../../actions/updateField'
 
 import { ReactComponent as CircleIcon } from '../../assets/icons/circle.svg'
@@ -60,6 +61,15 @@ const Task = ({ task, field }) => {
       {field.title} - {task.title}
     </StyledTask>
   )
+}
+
+Task.propTypes = {
+  task: PropTypes.shape({
+    status: PropTypes.string,
+    title: PropTypes.string,
+    id: PropTypes.string,
+  }),
+  field: PropTypes.string,
 }
 
 const StyledTask = styled.div`

@@ -2,12 +2,17 @@
 // https://reactjs.org/docs/error-boundaries.html
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import Error from './Error'
 
 class ErrorBoundary extends React.Component {
-  state = {
-    error: null,
+  constructor() {
+    super()
+
+    this.state = {
+      error: null,
+    }
   }
 
   componentDidCatch(error, info) {
@@ -25,6 +30,10 @@ class ErrorBoundary extends React.Component {
 
     return this.props.children
   }
+}
+
+ErrorBoundary.propTypes = {
+  children: PropTypes.string,
 }
 
 export default ErrorBoundary

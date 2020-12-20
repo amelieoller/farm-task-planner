@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import logOut from '../../actions/logOut'
 import { Button } from '../../styles/forms'
@@ -25,5 +26,13 @@ const Profile = ({ auth }) => (
     )}
   />
 )
+
+Profile.propTypes = {
+  auth: PropTypes.shape({
+    photoURL: PropTypes.string,
+    displayName: PropTypes.string,
+    email: PropTypes.string,
+  }),
+}
 
 export default Profile

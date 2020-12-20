@@ -4,12 +4,17 @@
 
 import Firebase from 'firebase/app'
 import React from 'react'
+import PropTypes from 'prop-types'
 
 class FirebaseAuth extends React.Component {
-  state = {
-    isLoading: true,
-    error: null,
-    auth: null,
+  constructor() {
+    super()
+
+    this.state = {
+      isLoading: true,
+      error: null,
+      auth: null,
+    }
   }
 
   componentDidMount() {
@@ -44,6 +49,10 @@ class FirebaseAuth extends React.Component {
   render() {
     return this.props.children(this.state)
   }
+}
+
+FirebaseAuth.propTypes = {
+  children: PropTypes.string,
 }
 
 export default FirebaseAuth

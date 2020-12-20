@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import { ReactComponent as CircleIcon } from '../../assets/icons/circle.svg'
 import { ReactComponent as PlayCircleIcon } from '../../assets/icons/play-circle.svg'
@@ -20,6 +21,14 @@ const Task = ({ task }) => {
       {task.field.title} - {task.title}
     </StyledTask>
   )
+}
+
+Task.propTypes = {
+  task: PropTypes.shape({
+    status: PropTypes.string,
+    field: PropTypes.string,
+    title: PropTypes.string,
+  }),
 }
 
 const StyledTask = styled.div`

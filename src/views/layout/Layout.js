@@ -2,10 +2,11 @@
 // check out App.js to see how it's used
 
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import logIn from '../../actions/logIn'
 import FirebaseAuth from '../misc/FirebaseAuth'
-import { HeaderFooterWrapper, Header, Footer } from '../../styles/layout'
+import { HeaderFooterWrapper, Header } from '../../styles/layout'
 import { HeaderLink } from '../../styles/links'
 import { ReactComponent as UserIcon } from '../../assets/icons/user.svg'
 
@@ -34,7 +35,11 @@ const Layout = ({ children }) => (
                 </HeaderLink>
               )
             }
-            return <button onClick={logIn}>log in</button>
+            return (
+              <button type="button" onClick={logIn}>
+                log in
+              </button>
+            )
           }}
         </FirebaseAuth>
       </div>
@@ -43,5 +48,9 @@ const Layout = ({ children }) => (
     {children}
   </HeaderFooterWrapper>
 )
+
+Layout.propTypes = {
+  children: PropTypes.string,
+}
 
 export default Layout

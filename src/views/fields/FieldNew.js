@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import FirebaseAuth from '../misc/FirebaseAuth'
 import Error from '../misc/Error'
@@ -6,6 +7,7 @@ import logIn from '../../actions/logIn'
 import createField from '../../actions/createField'
 import FieldForm from './FieldForm'
 import { Page } from '../../styles/layout'
+import { Button } from '../../styles/forms'
 
 const FieldNew = ({ history }) => (
   <Page>
@@ -23,7 +25,9 @@ const FieldNew = ({ history }) => (
           return (
             <div>
               <p>You must be logged in to add fields</p>
-              <button onClick={logIn}>log in</button>
+              <Button type="button" onClick={logIn}>
+                Log in
+              </Button>
             </div>
           )
         }
@@ -41,5 +45,9 @@ const FieldNew = ({ history }) => (
     </FirebaseAuth>
   </Page>
 )
+
+FieldNew.propTypes = {
+  history: PropTypes.string,
+}
 
 export default FieldNew

@@ -1,18 +1,17 @@
-import React, { useState, useCallback } from 'react'
+import React from 'react'
 import { FirestoreCollection } from 'react-firestore'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
+import PropTypes from 'prop-types'
 
 import Error from '../misc/Error'
 import FirebaseAuth from '../misc/FirebaseAuth'
-import { InternalLink } from '../../styles/links'
 import { Page } from '../../styles/layout'
-import Task from './Task'
 import Field from './Field'
 import { Button } from '../../styles/forms'
 import deleteField from '../../actions/deleteField'
 
-const FieldPage = ({ match }) => (
+const FieldPage = ({ match, history }) => (
   <Page>
     <FirestoreCollection
       path="fields"
@@ -62,5 +61,10 @@ const FieldPage = ({ match }) => (
     </FirestoreCollection>
   </Page>
 )
+
+FieldPage.propTypes = {
+  match: PropTypes.string,
+  history: PropTypes.string,
+}
 
 export default FieldPage

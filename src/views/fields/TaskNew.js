@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import {
   FormRow,
@@ -70,6 +71,11 @@ const TaskNew = ({ onSubmit, task }) => {
       )}
     </StyledTaskNew>
   )
+}
+
+TaskNew.propTypes = {
+  task: PropTypes.string,
+  onSubmit: PropTypes.func,
 }
 
 const StyledTaskNew = styled.div`

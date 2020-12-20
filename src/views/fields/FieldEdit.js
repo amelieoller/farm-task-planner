@@ -1,5 +1,6 @@
 import React from 'react'
 import { FirestoreCollection } from 'react-firestore'
+import PropTypes from 'prop-types'
 
 import Error from '../misc/Error'
 import deleteField from '../../actions/deleteField'
@@ -40,6 +41,7 @@ const FieldEdit = ({ match, history }) => (
             />
             <br />
             <button
+              type="button"
               onClick={() => deleteField(field).then(() => history.push(`/`))}
             >
               Delete field
@@ -50,5 +52,12 @@ const FieldEdit = ({ match, history }) => (
     </FirestoreCollection>
   </Page>
 )
+
+FieldEdit.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({ slug: PropTypes.string }),
+  }),
+  history: PropTypes.string,
+}
 
 export default FieldEdit

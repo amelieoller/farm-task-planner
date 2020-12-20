@@ -1,5 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import update from 'immutability-helper'
+import PropTypes from 'prop-types'
 
 import Task from './Task'
 import updateField from '../../actions/updateField'
@@ -32,6 +33,13 @@ const Field = ({ field }) => {
       </div>
     </>
   )
+}
+
+Field.propTypes = {
+  field: PropTypes.shape({
+    id: PropTypes.string,
+    tasks: PropTypes.string,
+  }),
 }
 
 export default Field

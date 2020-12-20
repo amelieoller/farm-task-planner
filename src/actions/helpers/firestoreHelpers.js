@@ -1,17 +1,16 @@
+/* eslint-disable no-param-reassign */
 // Helper functions for working with Firebase Firestore
 
 import Firebase from 'firebase/app'
 import 'firebase/auth'
 
-const prepareDocForCreate = (doc) => {
-  // timestamps
-  doc.createdBy = Firebase.auth().currentUser
+const prepareDocForCreate = (doc) => ({
+  ...doc,
+  createdBy: Firebase.auth().currentUser
     ? Firebase.auth().currentUser.uid
-    : null
-  doc.createdOn = Firebase.firestore.Timestamp.now()
-
-  return doc
-}
+    : null,
+  createdOn: Firebase.firestore.Timestamp.now(),
+})
 
 const prepareDocForUpdate = (doc) => {
   // timestamps

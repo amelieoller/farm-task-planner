@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 import { ReactComponent as DragIcon } from '../../assets/icons/menu.svg'
 
@@ -46,8 +47,10 @@ const Task = ({ task, index, moveCard }) => {
       moveCard(dragIndex, hoverIndex)
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
-      // but it's good here for the sake of performance
+      // but it's good here for the sake of performanceTaskNew
       // to avoid expensive index searches.
+
+      /* eslint-disable no-param-reassign */
       item.index = hoverIndex
     },
   })
@@ -73,6 +76,12 @@ const Task = ({ task, index, moveCard }) => {
       </div>
     </StyledTask>
   )
+}
+
+Task.propTypes = {
+  task: PropTypes.string,
+  index: PropTypes.string,
+  moveCard: PropTypes.func,
 }
 
 const StyledTask = styled.div`

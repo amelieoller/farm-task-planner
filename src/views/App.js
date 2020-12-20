@@ -1,8 +1,8 @@
 import Firebase from 'firebase/app'
 import { FirestoreProvider } from 'react-firestore'
 import React from 'react'
-import ReactGA from 'react-ga'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import PropTypes from 'prop-types'
 
 import ErrorBoundary from './misc/ErrorBoundary'
 import Routes from './Routes'
@@ -40,6 +40,10 @@ class ScrollToTop extends React.Component {
   render() {
     return null
   }
+}
+
+ScrollToTop.propTypes = {
+  location: PropTypes.string,
 }
 
 export default App

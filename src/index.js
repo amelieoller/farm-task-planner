@@ -6,12 +6,8 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ReactGA from 'react-ga'
 
 import App from './views/App'
-
-console.log('create-react-app env:', process.env.NODE_ENV)
-console.log('farmr project:', process.env.REACT_APP_ENV)
 
 // connect our app to firebase
 const dbConfig = {

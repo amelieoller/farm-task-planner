@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
-import updateField from '../../actions/updateField'
+import PropTypes from 'prop-types'
 import Backstage from './Backstage'
 import Live from './Live'
 
@@ -10,12 +10,12 @@ const Steam = ({ fields }) => {
   useEffect(() => {
     const displayTasks = []
 
-    for (let i = 0; i < fields.length; i++) {
+    for (let i = 0; i < fields.length; i += 1) {
       const field = fields[i]
       const { tasks } = field
       // const { tasks, ...field } = fields[i];
 
-      for (let j = 0; j < tasks.length; j++) {
+      for (let j = 0; j < tasks.length; j += 1) {
         const task = tasks[j]
 
         // If current task is completed, skip over it (continue)
@@ -28,17 +28,7 @@ const Steam = ({ fields }) => {
       }
     }
 
-    // // Reset all tasks if they're all completed
-    // if (!displayTasks.length) {
-    //   for (let i = 0; i < fields.length; i++) {
-    //     const field = fields[i];
-    //     const tasks = field.tasks.map((t) => ({ ...t, status: "not started" }));
-
-    //     updateField(field.id, { ...field, tasks });
-    //   }
-    // } else {
     setTasksToDisplay(displayTasks)
-    // }
   }, [fields])
 
   return (
@@ -53,6 +43,14 @@ const Steam = ({ fields }) => {
       />
     </Switch>
   )
+}
+
+Steam.propTypes = {
+  fields: PropTypes.arrayOf(
+    PropTypes.shape({
+      tasks: PropTypes.string,
+    }),
+  ),
 }
 
 export default Steam

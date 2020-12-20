@@ -22,7 +22,9 @@ const Account = () => (
           return (
             <div>
               <p>Log in to see your account</p>
-              <button onClick={logIn}>Log in</button>
+              <button type="button" onClick={logIn}>
+                Log in
+              </button>
             </div>
           )
         }

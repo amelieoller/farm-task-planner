@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FirestoreCollection } from 'react-firestore'
-import styled from 'styled-components'
 
 import Error from '../misc/Error'
 import Stream from './Steam'

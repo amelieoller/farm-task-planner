@@ -6,14 +6,9 @@
 // get the values from the form on submit.
 
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
-import {
-  FormRow,
-  FormLabel,
-  TextInput,
-  Checkbox,
-  Button,
-} from '../../styles/forms'
+import { FormRow, FormLabel, TextInput, Button } from '../../styles/forms'
 import TaskNew from './TaskNew'
 import { ReactComponent as PlusCircleIcon } from '../../assets/icons/plus-circle.svg'
 
@@ -51,8 +46,8 @@ const FieldForm = ({ onSubmit, field }) => {
         </FormRow>
 
         <h2>Tasks</h2>
-        {tasks.map((task, i) => (
-          <TaskNew key={i} task={task} onSubmit={onTaskSave} />
+        {tasks.map((task) => (
+          <TaskNew key={task.id} task={task} onSubmit={onTaskSave} />
         ))}
 
         <PlusCircleIcon
@@ -66,6 +61,14 @@ const FieldForm = ({ onSubmit, field }) => {
       </form>
     </>
   )
+}
+
+FieldForm.propTypes = {
+  field: PropTypes.shape({
+    title: PropTypes.string,
+    tasks: PropTypes.string,
+  }),
+  onSubmit: PropTypes.func,
 }
 
 export default FieldForm
