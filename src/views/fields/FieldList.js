@@ -1,14 +1,18 @@
 import React from 'react'
 import { FirestoreCollection } from 'react-firestore'
+import styled from 'styled-components'
 
 import Error from '../misc/Error'
 import { InternalLink } from '../../styles/links'
-import { Page } from '../../styles/layout'
+import { Button } from '../../styles/forms'
 
 const FieldList = () => (
-  <Page>
-    <InternalLink to="/new">New field</InternalLink>
-    <hr />
+  <StyledFieldList className="page">
+    <Button className="new-field-button">
+      <InternalLink to="/new">Create A New Field</InternalLink>
+    </Button>
+
+    <h1>Fields</h1>
     <FirestoreCollection path="fields" sort="title:asc">
       {({ error, isLoading, data }) => {
         if (error) {
@@ -34,7 +38,14 @@ const FieldList = () => (
         )
       }}
     </FirestoreCollection>
-  </Page>
+  </StyledFieldList>
 )
+
+const StyledFieldList = styled.div`
+  .new-field-button {
+    position: absolute;
+    right: 0;
+  }
+`
 
 export default FieldList

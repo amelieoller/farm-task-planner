@@ -65,6 +65,14 @@ const GlobalStyle = createGlobalStyle`
   h6 {
     font-size: .85rem;
   }
+
+  .page {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 1000px;
+    padding: 1rem;
+  }
 `
 
 export default GlobalStyle

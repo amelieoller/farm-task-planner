@@ -6,13 +6,12 @@ import PropTypes from 'prop-types'
 
 import Error from '../misc/Error'
 import FirebaseAuth from '../misc/FirebaseAuth'
-import { Page } from '../../styles/layout'
 import Field from './Field'
 import { Button } from '../../styles/forms'
 import deleteField from '../../actions/deleteField'
 
 const FieldPage = ({ match, history }) => (
-  <Page>
+  <div className="page">
     <FirestoreCollection
       path="fields"
       filter={['slug', '==', match.params.slug]}
@@ -59,7 +58,7 @@ const FieldPage = ({ match, history }) => (
         )
       }}
     </FirestoreCollection>
-  </Page>
+  </div>
 )
 
 FieldPage.propTypes = {

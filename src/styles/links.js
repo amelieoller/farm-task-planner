@@ -13,7 +13,7 @@ const InternalLink = styled(Link)`
   }
 `
 const HeaderLink = styled(Link)`
-  color: ${colors.black};
+  color: inherit;
   text-decoration: none;
   font-size: 1.2rem;
 `

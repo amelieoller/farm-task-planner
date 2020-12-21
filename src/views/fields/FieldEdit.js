@@ -6,10 +6,9 @@ import Error from '../misc/Error'
 import deleteField from '../../actions/deleteField'
 import updateField from '../../actions/updateField'
 import FieldForm from './FieldForm'
-import { Page } from '../../styles/layout'
 
 const FieldEdit = ({ match, history }) => (
-  <Page>
+  <div className="page">
     <FirestoreCollection
       path="fields"
       filter={['slug', '==', match.params.slug]}
@@ -50,7 +49,7 @@ const FieldEdit = ({ match, history }) => (
         )
       }}
     </FirestoreCollection>
-  </Page>
+  </div>
 )
 
 FieldEdit.propTypes = {

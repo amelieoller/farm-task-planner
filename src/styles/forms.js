@@ -19,11 +19,16 @@ const TextInput = styled.input`
 
 const Button = styled.button`
   padding: 0.5rem 1rem;
-  background: #65a5d9;
+  background: #e7cb58;
   border: none;
   border-radius: 3px;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+
+  a {
+    color: white;
+  }
 `
 
 const Checkbox = styled.input`

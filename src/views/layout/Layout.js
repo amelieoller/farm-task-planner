@@ -13,35 +13,37 @@ import { ReactComponent as UserIcon } from '../../assets/icons/user.svg'
 const Layout = ({ children }) => (
   <HeaderFooterWrapper>
     <Header>
-      <HeaderLink to="/">Home</HeaderLink> ·{' '}
-      <HeaderLink to="/new">New Field</HeaderLink> ·{' '}
-      <HeaderLink to="/new">Backstage</HeaderLink> ·{' '}
-      <HeaderLink to="/new">Live</HeaderLink>
-      <div style={{ float: 'right' }}>
-        <FirebaseAuth>
-          {({ isLoading, error, auth }) => {
-            if (isLoading) {
-              return '...'
-            }
-            if (error) {
-              return '⚠️ login error'
-            }
-            if (auth) {
+      <div>
+        <HeaderLink to="/">Home</HeaderLink> ·{' '}
+        <HeaderLink to="/new">New Field</HeaderLink> ·{' '}
+        <HeaderLink to="/stream/backstage">Backstage</HeaderLink> ·{' '}
+        <HeaderLink to="/stream/live">Live</HeaderLink>
+        <div style={{ float: 'right' }}>
+          <FirebaseAuth>
+            {({ isLoading, error, auth }) => {
+              if (isLoading) {
+                return '...'
+              }
+              if (error) {
+                return '⚠️ login error'
+              }
+              if (auth) {
+                return (
+                  <HeaderLink to="/account">
+                    <span role="img" aria-label="account">
+                      <UserIcon />
+                    </span>
+                  </HeaderLink>
+                )
+              }
               return (
-                <HeaderLink to="/account">
-                  <span role="img" aria-label="account">
-                    <UserIcon />
-                  </span>
-                </HeaderLink>
+                <button type="button" onClick={logIn}>
+                  Log In
+                </button>
               )
-            }
-            return (
-              <button type="button" onClick={logIn}>
-                log in
-              </button>
-            )
-          }}
-        </FirebaseAuth>
+            }}
+          </FirebaseAuth>
+        </div>
       </div>
     </Header>
 

@@ -6,11 +6,10 @@ import Error from '../misc/Error'
 import logIn from '../../actions/logIn'
 import createField from '../../actions/createField'
 import FieldForm from './FieldForm'
-import { Page } from '../../styles/layout'
 import { Button } from '../../styles/forms'
 
 const FieldNew = ({ history }) => (
-  <Page>
+  <div className="page">
     <FirebaseAuth>
       {({ isLoading, error, auth }) => {
         if (error) {
@@ -43,7 +42,7 @@ const FieldNew = ({ history }) => (
         )
       }}
     </FirebaseAuth>
-  </Page>
+  </div>
 )
 
 FieldNew.propTypes = {
