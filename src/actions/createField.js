@@ -15,6 +15,7 @@ const createField = (values) => {
     .add(prepareDocForCreate(newValues))
     .then(() => newValues)
     .catch((error) => {
+      // eslint-disable-next-line no-alert
       alert(`Whoops, couldn't create the field: ${error.message}`)
     })
 }

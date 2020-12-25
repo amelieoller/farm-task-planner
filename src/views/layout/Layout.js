@@ -52,7 +52,7 @@ const Layout = ({ children }) => (
 )
 
 Layout.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.arrayOf(PropTypes.shape({})),
 }
 
 export default Layout

@@ -22,7 +22,7 @@ const FieldForm = ({ onSubmit, field }) => {
     onSubmit({
       title,
       tasks,
-      lastWorkDone: new Date(),
+      lastWorkDone: Date.now(),
     })
   }
 

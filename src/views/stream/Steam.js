@@ -23,7 +23,7 @@ const Steam = ({ fields }) => {
           displayTasks.push({ ...task, field })
 
           // If current task is not started, push it and break
-          if (task.status === 'not started') break
+          if (task.status === 'not started' || !tasks[j + 1].isDependent) break
         }
       }
     }
@@ -48,7 +48,12 @@ const Steam = ({ fields }) => {
 Steam.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.shape({
-      tasks: PropTypes.string,
+      tasks: PropTypes.arrayOf(
+        PropTypes.shape({
+          status: PropTypes.string,
+          isDependent: PropTypes.bool,
+        }),
+      ),
     }),
   ),
 }

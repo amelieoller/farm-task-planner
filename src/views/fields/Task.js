@@ -64,6 +64,8 @@ const Task = ({ task, index, moveCard }) => {
   const opacity = isDragging ? 0 : 1
   drag(drop(ref))
 
+  const handleTaskTitleChange = () => {}
+
   return (
     <StyledTask ref={preview} style={{ opacity }}>
       <span className="drag-handle" ref={ref}>
@@ -71,7 +73,7 @@ const Task = ({ task, index, moveCard }) => {
       </span>
 
       <div className="content">
-        <input value={task.title}></input>
+        <input value={task.title} onChange={handleTaskTitleChange}></input>
         <span>{task.isDependent && 'isDependent'}</span>
       </div>
     </StyledTask>
@@ -79,8 +81,12 @@ const Task = ({ task, index, moveCard }) => {
 }
 
 Task.propTypes = {
-  task: PropTypes.string,
-  index: PropTypes.string,
+  task: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    title: PropTypes.string,
+    isDependent: PropTypes.bool,
+  }),
+  index: PropTypes.number,
   moveCard: PropTypes.func,
 }
 

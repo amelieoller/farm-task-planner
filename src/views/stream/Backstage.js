@@ -13,7 +13,11 @@ const Backstage = ({ tasks }) => (
     )} */}
 
     {tasks.map((task) => (
-      <BackstageTask key={task.id} task={task} field={task.field} />
+      <BackstageTask
+        key={task.id + task.field.id}
+        task={task}
+        field={task.field}
+      />
     ))}
   </StyledTask>
 )

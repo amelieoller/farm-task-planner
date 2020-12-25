@@ -52,7 +52,7 @@ class FirebaseAuth extends React.Component {
 }
 
 FirebaseAuth.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.func,
 }
 
 export default FirebaseAuth

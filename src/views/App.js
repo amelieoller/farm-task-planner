@@ -43,7 +43,7 @@ class ScrollToTop extends React.Component {
 }
 
 ScrollToTop.propTypes = {
-  location: PropTypes.string,
+  location: PropTypes.shape({}),
 }
 
 export default App

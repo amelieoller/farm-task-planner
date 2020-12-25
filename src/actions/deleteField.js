@@ -6,6 +6,7 @@ const deleteField = (field) =>
     .doc(field.id)
     .delete()
     .catch((error) => {
+      // eslint-disable-next-line no-alert
       alert(`Whoops, couldn't delete the field: ${error.message}`)
     })
 

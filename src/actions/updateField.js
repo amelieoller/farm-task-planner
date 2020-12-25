@@ -7,6 +7,7 @@ const updateField = (fieldId, values) =>
     .doc(fieldId)
     .update(prepareDocForUpdate(values))
     .catch((error) => {
+      // eslint-disable-next-line no-alert
       alert(`Whoops, couldn't edit the field: ${error.message}`)
     })
 

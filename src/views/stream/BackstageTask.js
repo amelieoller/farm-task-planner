@@ -22,14 +22,14 @@ const Task = ({ task, field }) => {
   const handleTaskClick = () => {
     // update state from either running -> completed OR not started -> running
     const newStatus = task.status === 'running' ? 'completed' : 'running'
-    let lastWorkDone = field.lastWorkDone || new Date()
+    let lastWorkDone = field.lastWorkDone || Date.now()
 
     let resetAll = false
     const newTasks = field.tasks.map((t, i) => {
       if (t.id === task.id) {
         if (newStatus === 'completed') {
-          if (field.tasks[i + 1] && !field.tasks[i + 1].isDependent) {
-            lastWorkDone = new Date()
+          if (!field.tasks[i + 1] || !field.tasks[i + 1].isDependent) {
+            lastWorkDone = Date.now()
           }
 
           // If there is no next task, reset all tasks
@@ -45,7 +45,7 @@ const Task = ({ task, field }) => {
 
     if (resetAll) {
       const tasks = field.tasks.map((t) => ({ ...t, status: 'not started' }))
-      updateField(field.id, { ...field, tasks })
+      updateField(field.id, { ...field, lastWorkDone, tasks })
     } else {
       updateField(field.id, {
         ...field,

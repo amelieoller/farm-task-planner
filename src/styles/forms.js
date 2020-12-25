@@ -8,6 +8,7 @@ const FormRow = styled.div`
 const FormLabel = styled.label`
   font-size: 14px;
   text-transform: uppercase;
+  color: #d7d7d7;
 `
 
 const TextInput = styled.input`

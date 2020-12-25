@@ -44,6 +44,7 @@ const FieldPage = ({ match, history }) => (
                 auth ? (
                   <Button
                     onClick={() =>
+                      // eslint-disable-next-line no-alert
                       window.confirm(
                         'Are you sure you want to delete this field?',
                       ) && deleteField(field).then(() => history.push(`/`))
@@ -62,8 +63,14 @@ const FieldPage = ({ match, history }) => (
 )
 
 FieldPage.propTypes = {
-  match: PropTypes.string,
-  history: PropTypes.string,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      slug: PropTypes.string,
+    }),
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 }
 
 export default FieldPage

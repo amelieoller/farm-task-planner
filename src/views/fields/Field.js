@@ -37,8 +37,12 @@ const Field = ({ field }) => {
 
 Field.propTypes = {
   field: PropTypes.shape({
+    tasks: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      }),
+    ),
     id: PropTypes.string,
-    tasks: PropTypes.string,
   }),
 }
 
