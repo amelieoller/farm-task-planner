@@ -8,17 +8,19 @@ import logIn from '../../actions/logIn'
 import FirebaseAuth from '../misc/FirebaseAuth'
 import { HeaderFooterWrapper, Header } from '../../styles/layout'
 import { HeaderLink } from '../../styles/links'
-import { ReactComponent as UserIcon } from '../../assets/icons/user.svg'
+import { Button } from '../../styles/forms'
 
 const Layout = ({ children }) => (
   <HeaderFooterWrapper>
     <Header>
       <div>
-        <HeaderLink to="/">Home</HeaderLink> ·{' '}
-        <HeaderLink to="/new">New Field</HeaderLink> ·{' '}
-        <HeaderLink to="/stream/backstage">Backstage</HeaderLink> ·{' '}
-        <HeaderLink to="/stream/live">Live</HeaderLink>
-        <div style={{ float: 'right' }}>
+        <div>
+          <HeaderLink to="/">Home</HeaderLink> |{' '}
+          <HeaderLink to="/new">New Field</HeaderLink> |{' '}
+          <HeaderLink to="/stream/backstage">Backstage</HeaderLink> |{' '}
+          <HeaderLink to="/stream/live">Live</HeaderLink>
+        </div>
+        <div>
           <FirebaseAuth>
             {({ isLoading, error, auth }) => {
               if (isLoading) {
@@ -30,20 +32,22 @@ const Layout = ({ children }) => (
               if (auth) {
                 return (
                   <HeaderLink to="/account">
-                    <span role="img" aria-label="account">
-                      <UserIcon />
-                    </span>
+                    <img
+                      src="https://img.icons8.com/dusk/344/farmer-male.png"
+                      alt=""
+                      aria-label="account"
+                    />
                   </HeaderLink>
                 )
               }
               return (
-                <button type="button" onClick={logIn}>
-                  Log In
-                </button>
+                <Button type="button" onClick={logIn}>
+                  Log in
+                </Button>
               )
             }}
           </FirebaseAuth>
-        </div>
+        </div>{' '}
       </div>
     </Header>
 

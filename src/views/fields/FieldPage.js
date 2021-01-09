@@ -3,15 +3,16 @@ import { FirestoreCollection } from 'react-firestore'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import PropTypes from 'prop-types'
+import styled from 'styled-components'
 
 import Error from '../misc/Error'
-import FirebaseAuth from '../misc/FirebaseAuth'
+// import FirebaseAuth from '../misc/FirebaseAuth'
 import Field from './Field'
-import { Button } from '../../styles/forms'
-import deleteField from '../../actions/deleteField'
+// import { Button } from '../../styles/forms'
+// import { ReactComponent as PlusSquareIcon } from '../../assets/icons/plus-square.svg'
 
 const FieldPage = ({ match, history }) => (
-  <div className="page">
+  <StyledFieldPage className="page">
     <FirestoreCollection
       path="fields"
       filter={['slug', '==', match.params.slug]}
@@ -33,13 +34,15 @@ const FieldPage = ({ match, history }) => (
 
         return (
           <div>
-            <h1>{field.title}</h1>
-
             <DndProvider backend={HTML5Backend}>
-              <Field field={field} />
+              <Field field={field} history={history} />
             </DndProvider>
 
-            <FirebaseAuth>
+            {/* <div>
+              <PlusSquareIcon />
+            </div> */}
+
+            {/* <FirebaseAuth>
               {({ auth }) =>
                 auth ? (
                   <Button
@@ -49,18 +52,43 @@ const FieldPage = ({ match, history }) => (
                         'Are you sure you want to delete this field?',
                       ) && deleteField(field).then(() => history.push(`/`))
                     }
+                    className="delete"
                   >
                     Delete Field
                   </Button>
                 ) : null
               }
-            </FirebaseAuth>
+            </FirebaseAuth> */}
           </div>
         )
       }}
     </FirestoreCollection>
-  </div>
+  </StyledFieldPage>
 )
+
+const StyledFieldPage = styled.div`
+  .field-title {
+    font-size: 1.7rem;
+    border: none;
+    margin-bottom: 10px;
+  }
+
+  span[role='button'] {
+    &:focus {
+      outline: none;
+    }
+  }
+
+  svg {
+    cursor: pointer;
+    width: 25px;
+    color: #92969b;
+
+    &:hover {
+      color: #81a2d8;
+    }
+  }
+`
 
 FieldPage.propTypes = {
   match: PropTypes.shape({

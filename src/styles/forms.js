@@ -19,16 +19,32 @@ const TextInput = styled.input`
 `
 
 const Button = styled.button`
-  padding: 0.5rem 1rem;
-  background: #e7cb58;
+  padding: 8px 18px;
+  background: #81a2d8;
   border: none;
-  border-radius: 3px;
+  border-radius: 8px;
   color: white;
   font-size: 16px;
   cursor: pointer;
 
+  &:hover {
+    background: #9dbcee;
+  }
+
+  &.delete {
+    background: #ef6d67;
+
+    &:hover {
+      background: #f2908b;
+    }
+  }
+
   a {
     color: white;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 `
 

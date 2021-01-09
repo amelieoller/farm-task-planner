@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     line-height: 1.4;
+    color: #32353e;
   }
 
   html,
@@ -70,8 +71,12 @@ const GlobalStyle = createGlobalStyle`
     position: relative;
     margin: 0 auto;
     width: 100%;
-    max-width: 1000px;
     padding: 1rem;
+
+    & > div {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
   }
 `
 

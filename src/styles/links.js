@@ -16,6 +16,10 @@ const HeaderLink = styled(Link)`
   color: inherit;
   text-decoration: none;
   font-size: 1.2rem;
+
+  img {
+    width: 30px;
+  }
 `
 
 export { InternalLink, HeaderLink }

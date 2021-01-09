@@ -1,15 +1,32 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { useDrag, useDrop } from 'react-dnd'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import { ReactComponent as DragIcon } from '../../assets/icons/menu.svg'
+import { ReactComponent as MinusSquareIcon } from '../../assets/icons/minus-square.svg'
+import { ReactComponent as CheckSquareIcon } from '../../assets/icons/check-square.svg'
+import { ReactComponent as SquareIcon } from '../../assets/icons/square.svg'
 
 const ItemTypes = {
   CARD: 'card',
 }
 
-const Task = ({ task, index, moveCard }) => {
+const Task = ({ task, index, moveCard, onTaskSave, onDeleteTask }) => {
+  const [title, setTitle] = useState((task && task.title) || '')
+  const [isDependent, setIsDependent] = useState(
+    (task && task.isDependent) || false,
+  )
+
+  const handleTaskSave = () => {
+    onTaskSave({
+      ...task,
+      title,
+      isDependent,
+      status: task.status || 'not started',
+    })
+  }
+
   const ref = useRef(null)
   const [, drop] = useDrop({
     accept: ItemTypes.CARD,
@@ -64,17 +81,42 @@ const Task = ({ task, index, moveCard }) => {
   const opacity = isDragging ? 0 : 1
   drag(drop(ref))
 
-  const handleTaskTitleChange = () => {}
+  const handleDeleteTask = () => {
+    onDeleteTask(task)
+  }
 
   return (
     <StyledTask ref={preview} style={{ opacity }}>
       <span className="drag-handle" ref={ref}>
         <DragIcon />
       </span>
-
       <div className="content">
-        <input value={task.title} onChange={handleTaskTitleChange}></input>
-        <span>{task.isDependent && 'isDependent'}</span>
+        <input
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onBlur={handleTaskSave}
+        ></input>
+        <div>
+          <span
+            role="button"
+            tabIndex={0}
+            onKeyDown={() =>
+              setIsDependent((prevIsDependent) => !prevIsDependent)
+            }
+            onClick={() =>
+              setIsDependent((prevIsDependent) => !prevIsDependent)
+            }
+          >
+            {isDependent ? <CheckSquareIcon /> : <SquareIcon />}
+          </span>
+          <MinusSquareIcon
+            onClick={() =>
+              // eslint-disable-next-line no-alert
+              window.confirm('Are you sure you want to remove this task?') &&
+              handleDeleteTask()
+            }
+          />
+        </div>
       </div>
     </StyledTask>
   )
@@ -85,15 +127,19 @@ Task.propTypes = {
     id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string,
     isDependent: PropTypes.bool,
+    status: PropTypes.string,
   }),
   index: PropTypes.number,
   moveCard: PropTypes.func,
+  onTaskSave: PropTypes.func,
+  onDeleteTask: PropTypes.func,
 }
 
 const StyledTask = styled.div`
-  border: 1px dashed gray;
-  padding: 0.2rem 1rem;
-  margin-bottom: 0.5rem;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding: 6px 15px;
+  margin-bottom: 6px;
   background-color: white;
   display: flex;
   align-items: center;
@@ -102,16 +148,6 @@ const StyledTask = styled.div`
     cursor: move;
     margin-right: 1rem;
     display: flex;
-
-    svg {
-      width: 24px;
-      color: #999999;
-
-      &:hover,
-      &:focus {
-        color: #333;
-      }
-    }
   }
 
   .content {

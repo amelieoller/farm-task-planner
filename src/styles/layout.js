@@ -8,19 +8,22 @@ const HeaderFooterWrapper = styled.div`
 `
 
 const Header = styled.div`
-  background: #76aede;
+  background: #73c1ac;
   color: white;
+  width: 100%;
+  padding: 1rem;
 
   & > div {
     width: 100%;
     max-width: 1000px;
-    padding: 1rem;
     margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 `
 
 const Footer = styled.div`
-  padding: 1rem;
   text-align: center;
   opacity: 0.3;
 `

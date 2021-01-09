@@ -4,9 +4,13 @@ import PropTypes from 'prop-types'
 
 import Task from './Task'
 import updateField from '../../actions/updateField'
+import deleteField from '../../actions/deleteField'
+import { Button } from '../../styles/forms'
+import { ReactComponent as PlusSquareIcon } from '../../assets/icons/plus-square.svg'
 
-const Field = ({ field }) => {
+const Field = ({ field, history }) => {
   const [tasks, setTasks] = useState(field.tasks)
+  const [title, setTitle] = useState((field && field.title) || '')
 
   const moveCard = useCallback(
     (dragIndex, hoverIndex) => {
@@ -24,13 +28,70 @@ const Field = ({ field }) => {
     [tasks],
   )
 
+  const onTaskSave = (task) => {
+    setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? task : t)))
+  }
+
+  const handleFieldSave = (e) => {
+    e.preventDefault()
+
+    const newField = {
+      title,
+      tasks,
+      lastWorkDone: Date.now(),
+    }
+
+    updateField(field.id, newField)
+
+    history.push('/')
+  }
+
+  const onDeleteTask = (task) => {
+    setTasks((prevTasks) => prevTasks.filter((t) => t.id !== task.id))
+  }
+
   return (
     <>
+      <input
+        className="field-title"
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
+
       <div>
         {tasks.map((task, i) => (
-          <Task key={task.id} index={i} task={task} moveCard={moveCard} />
+          <Task
+            key={task.id}
+            index={i}
+            task={task}
+            moveCard={moveCard}
+            onTaskSave={onTaskSave}
+            onDeleteTask={onDeleteTask}
+          />
         ))}
       </div>
+
+      <div>
+        <PlusSquareIcon
+          onClick={() =>
+            setTasks((prevTasks) => [...prevTasks, { id: tasks.length }])
+          }
+        />
+      </div>
+
+      <Button onClick={handleFieldSave}>Save Field</Button>
+
+      <Button
+        onClick={() =>
+          // eslint-disable-next-line no-alert
+          window.confirm('Are you sure you want to delete this field?') &&
+          deleteField(field).then(() => history.push(`/`))
+        }
+        className="delete"
+      >
+        Delete Field
+      </Button>
     </>
   )
 }
@@ -43,6 +104,10 @@ Field.propTypes = {
       }),
     ),
     id: PropTypes.string,
+    title: PropTypes.string,
+  }),
+  history: PropTypes.shape({
+    push: PropTypes.func,
   }),
 }
 

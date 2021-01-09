@@ -23,7 +23,7 @@ const Steam = ({ fields }) => {
           displayTasks.push({ ...task, field })
 
           // If current task is not started, push it and break
-          if (task.status === 'not started' || !tasks[j + 1].isDependent) break
+          if (task.status === 'not started' || !tasks[j + 1]?.isDependent) break
         }
       }
     }
