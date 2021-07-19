@@ -28,13 +28,17 @@ const Field = ({ field, history }) => {
     [tasks],
   )
 
-  const onTaskSave = (task) => {
-    setTasks((prevTasks) => prevTasks.map((t) => (t.id === task.id ? task : t)))
+  const onTaskSave = (task, addTask) => {
+    let newTasks = tasks.map((t) => (t.id === task.id ? task : t))
+
+    if (addTask) {
+      newTasks = [...newTasks, { id: tasks.length }]
+    }
+
+    setTasks(newTasks)
   }
 
-  const handleFieldSave = (e) => {
-    e.preventDefault()
-
+  const handleFieldSave = () => {
     const newField = {
       title,
       tasks,
@@ -80,7 +84,9 @@ const Field = ({ field, history }) => {
         />
       </div>
 
-      <Button onClick={handleFieldSave}>Save Field</Button>
+      <Button onClick={handleFieldSave} style={{ marginRight: '10px' }}>
+        Save All Tasks
+      </Button>
 
       <Button
         onClick={() =>

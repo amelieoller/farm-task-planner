@@ -18,13 +18,29 @@ const Task = ({ task, index, moveCard, onTaskSave, onDeleteTask }) => {
     (task && task.isDependent) || false,
   )
 
-  const handleTaskSave = () => {
-    onTaskSave({
+  const handleCheck = () => {
+    const newIsDependent = !isDependent
+
+    setIsDependent(newIsDependent)
+    handleTaskSave(newIsDependent, false)
+  }
+
+  const handleTaskInputKeydown = () => {
+    handleTaskSave(isDependent, true)
+  }
+
+  const handleTaskSave = (
+    newIsDependent = isDependent,
+    createNewField = false,
+  ) => {
+    const newTask = {
       ...task,
       title,
-      isDependent,
+      isDependent: newIsDependent,
       status: task.status || 'not started',
-    })
+    }
+
+    onTaskSave(newTask, createNewField)
   }
 
   const ref = useRef(null)
@@ -94,18 +110,16 @@ const Task = ({ task, index, moveCard, onTaskSave, onDeleteTask }) => {
         <input
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          onBlur={handleTaskSave}
+          onBlur={() => handleTaskSave(isDependent, false)}
+          onKeyDown={(e) => e.key === 'Enter' && handleTaskInputKeydown()}
+          autoFocus
         ></input>
         <div>
           <span
             role="button"
             tabIndex={0}
-            onKeyDown={() =>
-              setIsDependent((prevIsDependent) => !prevIsDependent)
-            }
-            onClick={() =>
-              setIsDependent((prevIsDependent) => !prevIsDependent)
-            }
+            onKeyDown={handleCheck}
+            onClick={handleCheck}
           >
             {isDependent ? <CheckSquareIcon /> : <SquareIcon />}
           </span>

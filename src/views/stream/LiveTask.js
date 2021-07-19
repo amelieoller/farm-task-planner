@@ -34,10 +34,12 @@ Task.propTypes = {
 const StyledTask = styled.div`
   padding: 5px 10px;
   display: flex;
+  align-items: center;
 
   svg {
     margin-right: 8px;
     width: 23px;
+    height: 23px;
   }
 `
 

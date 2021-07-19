@@ -10,10 +10,16 @@ const Steam = ({ fields }) => {
   useEffect(() => {
     const displayTasks = []
 
-    for (let i = 0; i < fields.length; i += 1) {
-      const field = fields[i]
+    const newFields = fields.sort((fieldA, fieldB) => {
+      const aHasRunningTask = fieldA.isRunning
+      const bHasRunningTask = fieldB.isRunning
+
+      return !!bHasRunningTask - !!aHasRunningTask
+    })
+
+    for (let i = 0; i < newFields.length; i += 1) {
+      const field = newFields[i]
       const { tasks } = field
-      // const { tasks, ...field } = fields[i];
 
       for (let j = 0; j < tasks.length; j += 1) {
         const task = tasks[j]

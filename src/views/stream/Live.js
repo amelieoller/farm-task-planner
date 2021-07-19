@@ -20,8 +20,8 @@ const StyledTask = styled.div`
   height: 100vh;
   color: white;
   padding: 10px;
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 200;
   line-height: 25px;
 `
 

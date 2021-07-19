@@ -46,7 +46,9 @@ const FieldNew = ({ history }) => (
 )
 
 FieldNew.propTypes = {
-  history: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 }
 
 export default FieldNew

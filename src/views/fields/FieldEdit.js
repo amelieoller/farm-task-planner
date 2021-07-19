@@ -56,7 +56,9 @@ FieldEdit.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({ slug: PropTypes.string }),
   }),
-  history: PropTypes.string,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }),
 }
 
 export default FieldEdit
